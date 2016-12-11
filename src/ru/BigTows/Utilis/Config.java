@@ -70,6 +70,7 @@ public class Config {
 			this.Data.set("Settings.TicksDamager", 3);
 			this.Data.set("Settings.TicksEntity", 5);
 			this.Data.set("Settings.NameEntity", "KOKOKO");
+			this.Data.set("Settings.Health",700);
 			this.SaveFile();
 		}
 	}

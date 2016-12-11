@@ -1,8 +1,8 @@
 package ru.BigTows.Listeners;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,8 +27,16 @@ public class Events implements Listener {
 		if (AntiLeave.DamageMap.get(Player) >= 2) {
 			ItemStack[] InventoryContent = Player.getInventory().getContents();
 			Location LocQuit = Player.getLocation();
-			Entity QuitPlayer = LocQuit.getWorld().spawnEntity(LocQuit, EntityType.CHICKEN);
+			LivingEntity QuitPlayer = (LivingEntity)LocQuit.getWorld().spawnEntity(LocQuit, EntityType.CHICKEN);
 			QuitPlayer.setCustomName(AntiLeave.Config.getString("Settings.NameEntity"));
+			double Health = AntiLeave.Config.getDouble("Settings.Health");
+			if (Health>2048){
+				Health=2048;
+			}else if (Health<=0){
+				Health = 200;
+			}
+			QuitPlayer.setMaxHealth(Health);
+			QuitPlayer.setHealth(Health);
 			Runnable Timer = new Runnable(InventoryContent, QuitPlayer, Player);
 			Timer.runTaskTimer(this.Plugin, (long) AntiLeave.Config.getDouble("Settings.TicksEntity") * 20, 1L);
 		}

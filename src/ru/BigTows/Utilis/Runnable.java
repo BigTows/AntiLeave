@@ -1,7 +1,7 @@
 package ru.BigTows.Utilis;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -12,12 +12,12 @@ import org.bukkit.entity.Player;
 public class Runnable extends BukkitRunnable {
 
 	private ItemStack[] InventoryContent;
-	private Entity Mob;
+	private LivingEntity Mob;
 	private Player Player;
 
 	private String Mode;
 
-	public Runnable(ItemStack[] InventoryContent, Entity Mob, Player Player) {
+	public Runnable(ItemStack[] InventoryContent, LivingEntity Mob, Player Player) {
 		this.InventoryContent = InventoryContent;
 		this.Mob = Mob;
 		this.Player = Player;
