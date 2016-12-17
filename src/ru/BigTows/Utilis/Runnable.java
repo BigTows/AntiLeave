@@ -14,18 +14,20 @@ public class Runnable extends BukkitRunnable {
 	private ItemStack[] InventoryContent;
 	private LivingEntity Mob;
 	private Player Player;
-
+	private AntiLeave Plugin;
 	private String Mode;
 
-	public Runnable(ItemStack[] InventoryContent, LivingEntity Mob, Player Player) {
+	public Runnable(ItemStack[] InventoryContent, LivingEntity Mob, Player Player,AntiLeave Plugin) {
 		this.InventoryContent = InventoryContent;
 		this.Mob = Mob;
 		this.Player = Player;
 		this.Mode = "Mob";
+		this.Plugin=Plugin;
 	}
 
-	public Runnable() {
+	public Runnable(AntiLeave Plugin) {
 		this.Mode = "Check";
+		this.Plugin=Plugin;
 	}
 
 	@Override
@@ -38,21 +40,22 @@ public class Runnable extends BukkitRunnable {
 						this.Mob.getWorld().dropItemNaturally(this.Mob.getLocation(), InventoryContent[i]);
 					}
 				}
-				AntiLeave.Data.addPlayer("Players", Player.getName());
+				Plugin.Data.addPlayer("Players", Player.getName());
 				this.cancel();
 			} else {
 				Mob.remove();
 				this.cancel();
 			}
+			Plugin.BlockJoin.remove(Player.getUniqueId());
 			break;
 		}
 		case "Check": {
 			for (Player Player: Bukkit.getOnlinePlayers()){
-				if (!AntiLeave.DamageMap.containsKey(Player)){
-					AntiLeave.DamageMap.put(Player, 0);
+				if (!Plugin.DamageMap.containsKey(Player)){
+					Plugin.DamageMap.put(Player, 0);
 				}
-				if (AntiLeave.DamageMap.get(Player)!=0){
-					AntiLeave.DamageMap.put(Player,AntiLeave.DamageMap.get(Player)-1);
+				if (Plugin.DamageMap.get(Player)!=0){
+					Plugin.DamageMap.put(Player,Plugin.DamageMap.get(Player)-1);
 				}
 			}
 			break;

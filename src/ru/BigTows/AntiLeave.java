@@ -1,7 +1,9 @@
 package ru.BigTows;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -15,10 +17,11 @@ public class AntiLeave extends JavaPlugin implements Listener{
 
 	private PluginManager PLuginManager = this.getServer().getPluginManager();
 	
-	public static Map<Player,Integer> DamageMap = new HashMap<Player,Integer>();
-	public static Config Data = new Config("Data.yml");
-	public static Config Config = new Config();
-	private Runnable Damage = new Runnable();
+	public  Map<Player,Integer> DamageMap = new HashMap<Player,Integer>();
+	public ArrayList<UUID> BlockJoin = new ArrayList<UUID>();
+	public  Config Data = new Config("Data.yml");
+	public  Config Config = new Config();
+	private Runnable Damage = new Runnable(this);
 	
 	
 	public void onEnable(){

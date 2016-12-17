@@ -62,17 +62,16 @@ public class Config {
 	}
 
 	public String getString(String Path) {
-		return this.Data.getString(Path);
+		return this.Data.getString(Path).replace('&', '§');
 	}
 
 	private void DefaultConfig() {
-		if (!this.Data.isSet("Settings")) {
-			this.Data.set("Settings.TicksDamager", 3);
-			this.Data.set("Settings.TicksEntity", 5);
-			this.Data.set("Settings.NameEntity", "KOKOKO");
-			this.Data.set("Settings.Health",700);
-			this.SaveFile();
-		}
+		if (!this.Data.isSet("Settings.TicksDamager")) this.Data.set("Settings.TicksDamager", 3);
+		if (!this.Data.isSet("Settings.TicksEntity")) this.Data.set("Settings.TicksEntity", 5);
+		if (!this.Data.isSet("Settings.NameEntity")) this.Data.set("Settings.NameEntity", "&4&l%player% Вышел...");
+		if (!this.Data.isSet("Settings.Health")) this.Data.set("Settings.Health", 500);
+		if (!this.Data.isSet("Messages.KICK")) this.Data.set("Messages.KICK", "&4&lТы ушел с пвп. &a&lПодожди немного....");
+		this.SaveFile();
 	}
 
 	public Config(String Name) {
