@@ -1,6 +1,6 @@
 # AntiLeave
 Minecraft Plugin
-#Description
+## Description
 How it works: When a player is in PVP and they log off, a NPC is placed where they logged out. 
 If you kill the NPC, you get what was in the player's inventory.
 #Version
